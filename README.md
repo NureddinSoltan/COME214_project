@@ -17,6 +17,6 @@
 #### Output of your code. 
 - In your report, you will include screenshots which belong to each part of your output and **explain each screenshot.**
 - Add your output format as follows:
-![Screen Shot 2024-04-09 at 4.07.36 PM.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fc8%2Fxnw5tnl52n791pftz7ytslr40000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_KCWtHt%2FScreen%20Shot%202024-04-09%20at%204.07.36%20PM.png)
+![Screen Shot 2024-04-09 at 4.09.41 PM.png](..%2F..%2FDesktop%2FScreen%20Shot%202024-04-09%20at%204.09.41%20PM.png)
 ### Note:
 #### use CodeSnap plugin to take screenshots of your code: https://plugins.jetbrains.com/plugin/20009-codesnap
