@@ -20,3 +20,4 @@
 ![Screen Shot 2024-04-09 at 4.09.41 PM.png](..%2F..%2FDesktop%2FScreen%20Shot%202024-04-09%20at%204.09.41%20PM.png)
 ### Note:
 #### use CodeSnap plugin to take screenshots of your code: https://plugins.jetbrains.com/plugin/20009-codesnap
+#### word file: https://uskudaruniv-my.sharepoint.com/:w:/g/personal/noureldiensoltanabdelrahman_ahmed_st_uskudar_edu_tr/Eer8Dw0XiKJIqr8ICEPbFt4B4et7KKrRYBNiQ6hTPtsMDQ?e=ydBHaT
