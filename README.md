@@ -17,3 +17,5 @@
 #### Output of your code. 
 - In your report, you will include screenshots which belong to each part of your output and **explain each screenshot.**
 
+
+### Note: use CodeSnap plugin to take screenshots of your code: https://plugins.jetbrains.com/plugin/20009-codesnap
