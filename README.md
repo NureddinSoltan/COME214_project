@@ -8,7 +8,7 @@
 - Create a new method
 - Call your method in the main function
 #### Then submitting the code to the repo
-- Create your own branch from the main branch
+- Create your own branch from the dev branch
 - Create a pull request from your branch to the dev branch
 
 ### Documentation format:
