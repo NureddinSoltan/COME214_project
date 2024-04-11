@@ -1,23 +1,9 @@
-public class SampleCode {
-    public static void main(String[] args) {
-        // Function 1
-        public void greet() {
-            System.out.println("Hello, world!");
-        }
-
-        // Function 2
-        private int add(int a, int b) {
-            return a + b;
-        }
-
-        // Function 3
-        protected static void display(String message) {
-            System.out.println(message);
-        }
-
-        // Function 4
-        void print() {
-            System.out.println("Printing...");
-        }
-    }
-}
+public static int sum (int a, int b, int c, int d)
+private void printMessage
+void calculate(float x, float y, z)
+float calculate(float x, float y, int y)
+static String getName()
+public int[] getArray()
+public static void main(String[] args)
+public static void main(String[] args, String y)
+private void printMessage(int a, int b,)
