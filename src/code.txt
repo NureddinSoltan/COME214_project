@@ -1,0 +1,63 @@
+public class IdentifierExample {
+
+  public static void main(String[] args) {
+
+    // Declare variables with different data types (int, float, boolean)
+    int number = 10;
+    float decimalValue = 3.14f;
+    boolean isTrue = true;
+
+    // Use a loop (for loop) to iterate 5 times
+    for (int i = 0; i < 5; i++) {
+      System.out.println("Iteration: " + (i + 1));
+
+      // Use an if statement to check if a condition is true
+      if (number > 5) {
+        System.out.println("Number is greater than 5");
+      } else {
+        System.out.println("Number is less than or equal to 5");
+      }
+
+      // Demonstrate a switch statement with case options
+      switch (i) {
+        case 0:
+          System.out.println("First iteration");
+          break;
+        case 2:
+          System.out.println("Third iteration");
+          break;
+        default:
+          System.out.println("Other iteration");
+      }
+    }
+
+    // Try-catch block to handle potential exceptions (throws)
+    try {
+      int result = number / 0; // This will cause an exception
+      System.out.println("Result: " + result);
+    } catch (ArithmeticException e) {
+      System.out.println("Error: Division by zero!");
+    } finally {
+      System.out.println("This code will always execute (finally block)");
+    }
+
+    // Class declaration with public access modifier
+    public class InnerClass {
+      public void innerMethod() {
+        System.out.println("This is an inner method");
+      }
+    }
+
+    // Create an instance of the inner class
+    InnerClass innerObject = new InnerClass();
+    innerObject.innerMethod();
+  }
+}
+
+// class
+class
+/* class
+ class */
+/* class
+this is class
+*/
