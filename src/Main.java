@@ -4,17 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Main {
-
-    private static final Set<String> DATA_TYPES = new HashSet<>(Arrays.asList(
-            "byte", "short", "int", "long", "float", "double", "boolean", "char",
-            "Byte", "Short", "Integer", "Long", "Float", "Double", "Boolean", "Character", "String"));
 
     public static void main(String[] args) {
 
@@ -24,7 +17,7 @@ public class Main {
             String line;
             int lineNumber = 1;
             while ((line = br.readLine()) != null) {
-                checkIdentifiers(line, lineNumber);
+                // checkIdentifiers(line, lineNumber);
                 isFunctionHeader(line, lineNumber);
                 lineNumber++;
             }
@@ -57,10 +50,6 @@ public class Main {
                     foundIdentifier = true;
                 }
             }
-            // else {
-            // System.out.println("Line no: " + lineNumber + " --> : no built-in language
-            // construct found");
-            // }
         }
 
         if (!foundIdentifier) {
@@ -68,29 +57,41 @@ public class Main {
         }
 
     }
-
-
     public static void isFunctionHeader(String line, int lineNumber) {
-        // Build regex for data types, including arrays
-        String dataTypes = DATA_TYPES.stream()
-                .map(dt -> dt + "(\\[\\s*\\])*") // Allow arrays
-                .collect(Collectors.joining("|"));
+        // Define 3 arrays of all types
+        String[] nonPrimitiveTypes = {"Byte", "Short", "Integer", "Long", "Float", "Double", "Boolean", "Character", "String"};
+        String[] collectionsNonprimitiveTypes = {"ArrayList", "HashSet", "Set", "LinkedList", "TreeSet", "TreeMap", "Stack", "Queue"};
+        String[] varPrimitiveTypes = {"String", "int", "double", "boolean", "char", "long", "float", "byte", "short"};
 
-        String dataTypeRegex = "(" + dataTypes + "|void)";
+        // Extracting the function header (method signature) without the body
+        int bodyIndex = line.indexOf('{');
+        String header = bodyIndex != -1 ? line.substring(0, bodyIndex).trim() : line.trim();
+        
+        // Modifiers Regex
+        String modifiersRegex = "^((public|private|protected|\\s)*\\s*)(static\\s+)?";
 
-        String modifiers = "^\\s*(public\\s+|private\\s+|protected\\s+|static\\s+)*";
-        String returnType = dataTypeRegex + "\\s+";
-        String methodName = "[a-zA-Z0-9_]+";
+        // ReturnT types Regex
+        String returnTypeRegex = "(" + String.join("|", varPrimitiveTypes) + "|void|" + String.join("|", collectionsNonprimitiveTypes) + ")(\\[\\]|<(" + String.join("|", nonPrimitiveTypes) + ")>)?\\s+";
 
-        String parameters = "\\s*\\(\\s*((" + dataTypeRegex + "\\s+)+(\\[\\s*\\])*[a-zA-Z0-9_]+(\\s*,\\s*("
-                + dataTypeRegex + "\\s+)+(\\[\\s*\\])*[a-zA-Z0-9_]+)*)?\\s*\\)";
-        String regex = modifiers + returnType + methodName + parameters;
+        // Function name & variables Regex
+        String function_variable_NameRegex = "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b";
 
-        if (line.matches(regex)) {
-            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " is a method declaration");
+        // Parameters Regex
+        String parameters = "\\s*\\(\\s*((" + String.join("|", varPrimitiveTypes) + "|" + String.join("|", collectionsNonprimitiveTypes)
+                + ")(\\[\\]|<" + String.join("|", nonPrimitiveTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*(,\\s*("
+                + String.join("|", varPrimitiveTypes) + "|" + String.join("|", collectionsNonprimitiveTypes)
+                + ")(\\[\\]|<" + String.join("|", nonPrimitiveTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*)*)?\\)\\s*$";
+
+        // Merged Regex
+        String fullMethodDeclarationRegex = modifiersRegex + returnTypeRegex + function_variable_NameRegex + parameters;
+
+        // Check if the function header matches any of the patterns
+        if (header.matches(fullMethodDeclarationRegex)) {
+            System.out.println("Line no: " + lineNumber + " --> " + line.trim() +" --> is a valid function header");
         } else {
-            System.out.println(
-                    "Line no: " + lineNumber + " --> " + line.trim() + " is not a method declaration");
+            System.out.println("Line no: " + lineNumber + " --> " + line.trim() +" --> is not a valid function header");
         }
+        
     }
+
 }
