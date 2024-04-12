@@ -1,29 +1,3 @@
-int inrajim
-intt
-INT
-floatint
-public static void checkIdentifiers(String line, int lineNumber)
-intdouble
-int double
-kint
-// int
-//int 
-/int
-/ int
-2int
-_int
-^int
-/* int
-int
-static */
-*/
-class
-/* class
- class */
-/* class
-this is class
-*/
-class
 public static int sum (int a, int b, int c, int d)
 private void printMessage
 void calculate(float x, float y, z)
@@ -36,3 +10,6 @@ private void printMessage(int a, int b,)
 private void printMessage(int a, int b 
 private void printMessage int a, int b)
 private void printMessage (int a, int b)
+public ArrayList<String> getListOfStri8ngs88()
+public ArrayList<String> 142getListOfStri8ngs88()
+public ArrayList<String> -getListOfStri8ngs88()
