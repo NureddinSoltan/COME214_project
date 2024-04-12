@@ -36,7 +36,7 @@ public class Main {
         analyze_comments(content.toString());
 
 
-        System.out.println("=====================================Testing function headers and identifiers=====================================");
+        System.out.println("=====================================Testing function headers=====================================");
         // test function headers with the file functionTest.txt
         Path path2 = Paths.get("src", "functionTest.txt");
 
@@ -61,6 +61,34 @@ public class Main {
             int lineNumber = 1;
             while ((line = br.readLine()) != null) {
                 checkIdentifiers(line, lineNumber);
+                lineNumber++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println("=====================================Testing for loops=====================================");
+        Path path4 = Paths.get("src", "forLoopTest.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(path4.toString()))){
+            String line;
+            int lineNumber = 1;
+            while ((line = br.readLine()) != null) {
+                foorLoopType(line, lineNumber);
+                lineNumber++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println("=====================================Testing while loops=====================================");
+        Path path5 = Paths.get("src", "whileLoopTest.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(path5.toString()))){
+            String line;
+            int lineNumber = 1;
+            while ((line = br.readLine()) != null) {
+                whileLoopType(line, lineNumber);
                 lineNumber++;
             }
         } catch (IOException e) {
