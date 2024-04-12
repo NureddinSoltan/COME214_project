@@ -1,5 +1,6 @@
 int inrajim
-intt 
+intt
+INT
 floatint
 public static void checkIdentifiers(String line, int lineNumber)
 intdouble
