@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     final static String[] varPrimitiveTypes = { "String", "int", "double", "boolean", "char", "long", "float", "byte", "short" };
@@ -15,20 +17,34 @@ public class Main {
     final static String comparisonOperatorsRegex = "(" + String.join("|", comparisonOperators) + ")";
     final static String primitiveTypes = "(" + String.join("|", varPrimitiveTypes) + ")";
     final static String variable_NameRegex = "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b";
-  
-    public static void main(String[] args) {
-        // String fileName = "code.txt";
-        Path path = Paths.get("src","code.txt");
 
+    public static void main(String[] args) {
+        System.out.println("=====================================Testing comments=====================================");
+        Path path = Paths.get("src", "commentTest.txt");
+
+        StringBuilder content = new StringBuilder();
 
         try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
             String line;
+            while ((line = br.readLine()) != null) {
+                content.append(line).append("\n");  // Append each line with a newline
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        analyze_comments(content.toString());
+
+
+        System.out.println("=====================================Testing function headers=====================================");
+        // test function headers with the file functionTest.txt
+        Path path2 = Paths.get("src", "functionTest.txt");
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path2.toString()))){
+
+            String line;
             int lineNumber = 1;
             while ((line = br.readLine()) != null) {
-
-                foorLoopType(line, lineNumber);
-
-                checkIdentifiers(line, lineNumber);
                 isFunctionHeader(line, lineNumber);
 
                 lineNumber++;
@@ -36,7 +52,70 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("=====================================Testing identifiers=====================================");
+        Path path3 = Paths.get("src", "identifiersTest.txt");
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path3.toString()))){
+            String line;
+            int lineNumber = 1;
+            while ((line = br.readLine()) != null) {
+                checkIdentifiers(line, lineNumber);
+                lineNumber++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println("=====================================Testing for loops=====================================");
+        Path path4 = Paths.get("src", "forLoopTest.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(path4.toString()))){
+            String line;
+            int lineNumber = 1;
+            while ((line = br.readLine()) != null) {
+                foorLoopType(line, lineNumber);
+                lineNumber++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println("=====================================Testing while loops=====================================");
+        Path path5 = Paths.get("src", "whileLoopTest.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(path5.toString()))){
+            String line;
+            int lineNumber = 1;
+            while ((line = br.readLine()) != null) {
+                whileLoopType(line, lineNumber);
+                lineNumber++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    public static void analyze_comments(String content) {
+        // detect single line comments with regex
+        String singleLineComment = "//.*";
+        Pattern patternSingle = Pattern.compile(singleLineComment);
+        Matcher matcherSingle = patternSingle.matcher(content);
+
+        while (matcherSingle.find()) {
+            System.out.println("Single-line comment found: " + matcherSingle.group());
+        }
+
+        // detect multi-line comments with regex, using DOTALL flag
+        String multiLineComment = "/\\*.*?\\*/";
+        Pattern patternMulti = Pattern.compile(multiLineComment, Pattern.DOTALL);
+        Matcher matcherMulti = patternMulti.matcher(content);
+
+        while (matcherMulti.find()) {
+            System.out.println("Multi-line comment found: " + matcherMulti.group());
+        }
+    }
+
 
 
     public static void foorLoopType(String line, int lineNumber) {
