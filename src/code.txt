@@ -1,26 +1,16 @@
-while(i<10)
-while(i < 10 )
-while(i < 10 ){
-while(i < 10 ){}
-//false while cases
-while( i < 1 0 )
-while( i < 10 
-while(i10)
-while (i < 10){
-while(i < 10) {
-while(i < 10) { }
-while(i  10) 
-}
-for(int i=0;i<10;i++)
-for(String i=0;i<10;i++)
-for(i=0;i<10;i++)
-for(i=0;i<10;i=i+1)
-for(i=0;i<10;i=i+1){
-for(i=0;i<10;i=i+1) {}
-//false  for cases
-for(string i=0;i<10;i++)
-for(i=0;i<10;i++
-for(i=0;i<10;i+){
-for(i=0;i<10i++){
-for(i=0;i<10;){}
-for(i=0;i;i++){}
+while (i< 10)
+while (i < 10
+while i < 10)
+while i < 10
+while (i 10)
+while (i < stre)
+whil (i < 10)
+while (i <== 10)
+while (sda > aopds)
+while ( i === 10) Error
+while (i != 10) { }
+while (i !== 10) Error
+while (i == 10)
+while (i >== 10)
+while (int i = 2 > 23)
+while (I == 3)
