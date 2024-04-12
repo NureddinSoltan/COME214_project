@@ -10,6 +10,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+    final static String[] varPrimitiveTypes = { "String", "int", "double", "boolean", "char", "long", "float", "byte", "short" };
+    final static   String[] comparisonOperators = { "==", "!=", ">", ">=", "<", "<=" };
+    
+    // Join the comparison operators into a regex group
+    final static String comparisonOperatorsRegex = "(" + String.join("|", comparisonOperators) + ")";
+    final static String primitiveTypes = "(" + String.join("|", varPrimitiveTypes) + ")";
+    final static String variable_NameRegex = "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b";
 
     public static void main(String[] args) {
         System.out.println("=====================================Testing comments=====================================");
@@ -39,6 +46,7 @@ public class Main {
             int lineNumber = 1;
             while ((line = br.readLine()) != null) {
                 isFunctionHeader(line, lineNumber);
+
                 lineNumber++;
             }
         } catch (IOException e) {
@@ -80,6 +88,30 @@ public class Main {
         }
     }
 
+
+
+    public static void foorLoopType(String line, int lineNumber) {
+        // Modified forLoopPattern to use backreferences to ensure the same variable name is used
+        String forLoopPattern = "^\\s*for\\s*\\(\\s*" + primitiveTypes + "\\s+(" + variable_NameRegex + ")\\s*=\\s*\\d+\\s*;\\s*\\2\\s*" + comparisonOperatorsRegex + "\\s*\\d+\\s*;\\s*(\\2\\s*(\\+\\+|--)|\\s*(\\+\\+|--)\\s*\\2|\\2\\s*[\\+\\-\\*\\/]=\\s*\\d+|\\2\\s*=\\s*\\2\\s*[\\+\\-\\*\\/]\\s*\\d+)\\)\\s*.*";
+
+        // Check if the line matches the for loop pattern
+        if (line.matches(forLoopPattern)) {
+            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " --> is a valid for loop");
+        } else {
+            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " --> is not a valid for loop");
+        }
+    }
+    public static void whileLoopType(String line, int lineNumber) {
+        // Modified forLoopPattern to use backreferences to ensure the same variable name is used
+        String whileLoopPattern = "^\\s*while\\s*\\(\\s*+(" + variable_NameRegex + ")\\s*" + comparisonOperatorsRegex + "\\s*(\\d|\\w)+\\s*\\)\\s*.*";
+        
+        // Check if the line matches the for loop pattern
+        if (line.matches(whileLoopPattern)) {
+            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " --> is a valid for loop");
+        } else {
+            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " --> is not a valid for loop");
+        }
+    }
 
     public static void checkIdentifiers(String line, int lineNumber) {
         List<String> identifiers = new ArrayList<>(Arrays.asList(
@@ -140,5 +172,6 @@ public class Main {
                     "Line no: " + lineNumber + " --> " + line.trim() + " is not a method declaration");
         }
     }
+
 
 }
