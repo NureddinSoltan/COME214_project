@@ -18,7 +18,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Path path = Paths.get("src", "file.txt");
+        Path path = Paths.get("src", "code.txt");
 
         try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
             String line;
