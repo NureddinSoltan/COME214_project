@@ -18,7 +18,8 @@ public class Main {
             "byte", "short", "int", "long", "float", "double", "boolean", "char",
             "Byte", "Short", "Integer", "Long", "Float", "Double", "Boolean", "Character", "String"));
     public static void main(String[] args) {
-        Path path = Paths.get("src", "testComment.txt");
+        System.out.println("=====================================Testing comments=====================================");
+        Path path = Paths.get("src", "commentTest.txt");
 
         StringBuilder content = new StringBuilder();
 
@@ -32,6 +33,36 @@ public class Main {
         }
 
         analyze_comments(content.toString());
+
+
+        System.out.println("=====================================Testing function headers and identifiers=====================================");
+        // test function headers with the file functionTest.txt
+        Path path2 = Paths.get("src", "functionTest.txt");
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path2.toString()))){
+            String line;
+            int lineNumber = 1;
+            while ((line = br.readLine()) != null) {
+                isFunctionHeader(line, lineNumber);
+                lineNumber++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("=====================================Testing identifiers=====================================");
+        Path path3 = Paths.get("src", "identifiersTest.txt");
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path3.toString()))){
+            String line;
+            int lineNumber = 1;
+            while ((line = br.readLine()) != null) {
+                checkIdentifiers(line, lineNumber);
+                lineNumber++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void analyze_comments(String content) {
