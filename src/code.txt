@@ -1,3 +1,47 @@
+while (i< 10)
+while (i < 10
+while i < 10)
+while i < 10
+while (i 10)
+while (i < stre)
+whil (i < 10)
+while (i <== 10)
+while (sda > aopds)
+while ( i === 10) Error
+while (i != 10) { }
+while (i !== 10) Error
+while (i == 10)
+while (i >== 10)
+while (int i = 2 > 23)
+while (I == 3)
+
+for (int j=0; j <= 10; j++)
+for (int i=0; i <= 10; ++i)
+for (int i=0; i <= 10; i+=2) 
+for (int i=0; i <= 10; i = i + 2) 
+for (int i=0; i <= 10; i--) 
+for (int i=0; i <= 10; --i) 
+for (int i=0; i <= 10; i -= 2) 
+for (int i=0; i <= 10; i = i - 2) 
+for (int i=0; i <= 10; i *= 2) 
+for (int i=0; i <= 10; i += 2) 
+for (int i=0; i <= 10; i -= 2) 
+for (int i=0; i <= 10; i /= 2) 
+for (int i=0; i <= 10; i**2) 
+for (int i=0; i <= 10; i++2) 
+for (int i=0; i <= 10; i--2) 
+for (int i=0; i <= 10; i//2) 
+for (int i=0; i <= 10; i**2) 
+for (int i=0; i <=10; i+) 
+for (int i=0; i <= 10; i-) 
+for (int i=0; i <= 10; i*) 
+for (int i=0; i <= 10; i/) 
+for (int i=0; i == 10; i++ 
+for int i=0; i == 10; i++)
+for {int i=0; i == 10; i++ }
+for int i=0; i == 10; i++}
+for {int i=0; i == 10; i++ 
+
 int inrajim
 intt
 INT
@@ -39,3 +83,4 @@ private void printMessage (int a, int b)
 public ArrayList<String> getListOfStri8ngs88()
 public ArrayList<String> 142getListOfStri8ngs88()
 public ArrayList<String> -getListOfStri8ngs88()
+
