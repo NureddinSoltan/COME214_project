@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        String fileName = "src/code.txt";
-
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName.toString()))) {
+        Path path = Paths.get("src", "code.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
             String line;
             int lineNumber = 1;
             while ((line = br.readLine()) != null) {
