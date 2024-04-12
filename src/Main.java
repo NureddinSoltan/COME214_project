@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) {
-        String fileName = "code.txt";
+        String fileName = "./code.txt";
         // Path path = Paths.get("src","code.txt");
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -39,7 +39,10 @@ public class Main {
 
     public static String getLoopType(String line) {
         String whileLoopPattern = "^\\s*while\\s*\\(\\s*\\w+\\s*[<>!=]=?\\s*\\w+\\s*\\)\\s*.*$";
-        String forLoopPattern = "^\\s*for\\s*\\(\\s*(?:(?:int|double|String|char|boolean|long|float|short|byte)\\s+)?\\w+\\s*=\\s*\\w+\\s*;\\s*\\w+\\s*[<>]=?\\s*\\w+\\s*;\\s*\\w+\\s*=\\s*\\w+(?:\\s*[+-/]\\s*\\d+)?\\s*\\)\\s*(?:\\{)?\\s*$";
+
+        String forLoopPattern = "^\\s*for\\s*\\((?:\\s*(?:int\\s+)?\\w+\\s*=\\s*\\w+\\s*;\\s*\\w+\\s*[<>]?=?\\s*\\w+\\s*;\\s*\\w+\\s*=\\s*\\w+(?:[\\+\\-\\*\\/]\\d+|\\s*=\\s*\\w+)?\\s*)\\)\\s*(?:\\{)?\\s*$";
+        // String forLoopPattern = "^\\s*for\\s*\\((\\s*int\\s+\\w+\\s*=\\s*\\w+\\s*;\\s*\\w+\\s*[<>]?[=]?\\s*\\w+\\s*;\\s*(\\w+[\\+\\-\\*\\/]\\d+|\\w+\\*\\d+|\\w+[\\+\\-]{2})\\s*)\\)\\s*\\{.*$";
+
         Pattern forPattern = Pattern.compile(forLoopPattern);
         Matcher forMatcher = forPattern.matcher(line);
         if (forMatcher.matches()) {
@@ -55,5 +58,4 @@ public class Main {
         return "none";
     }
 }
-
 
