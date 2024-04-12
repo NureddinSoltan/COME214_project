@@ -66,7 +66,7 @@ public class Main {
 
     }
 
-}
+
     public static void isFunctionHeader(String line, int lineNumber) {
         // Build regex for data types, including arrays
         String dataTypes = DATA_TYPES.stream()
