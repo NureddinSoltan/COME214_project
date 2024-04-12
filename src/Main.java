@@ -4,16 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Path path = Paths.get("src", "code.txt");
+        String fileName = "src/code.txt";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName.toString()))) {
             String line;
             int lineNumber = 1;
             while ((line = br.readLine()) != null) {
@@ -59,39 +57,34 @@ public class Main {
     }
     public static void isFunctionHeader(String line, int lineNumber) {
         // Define 3 arrays of all types
-        String[] nonPrimitiveTypes = {"Byte", "Short", "Integer", "Long", "Float", "Double", "Boolean", "Character", "String"};
-        String[] collectionsNonprimitiveTypes = {"ArrayList", "HashSet", "Set", "LinkedList", "TreeSet", "TreeMap", "Stack", "Queue"};
-        String[] varPrimitiveTypes = {"String", "int", "double", "boolean", "char", "long", "float", "byte", "short"};
+        String[] dataTypes = {"Byte", "Short", "Integer", "Long", "Float", "Double", "Boolean", "Character", "String",
+        "ArrayList", "HashSet", "Set", "LinkedList", "TreeSet", "TreeMap", "Stack", "Queue","int", "double", "boolean", 
+        "char", "long", "float", "byte", "short"};
 
-        // Extracting the function header (method signature) without the body
-        int bodyIndex = line.indexOf('{');
-        String header = bodyIndex != -1 ? line.substring(0, bodyIndex).trim() : line.trim();
-        
         // Modifiers Regex
         String modifiersRegex = "^((public|private|protected|\\s)*\\s*)(static\\s+)?";
 
         // ReturnT types Regex
-        String returnTypeRegex = "(" + String.join("|", varPrimitiveTypes) + "|void|" + String.join("|", collectionsNonprimitiveTypes) + ")(\\[\\]|<(" + String.join("|", nonPrimitiveTypes) + ")>)?\\s+";
+        String returnTypeRegex = "(" + String.join("|", dataTypes) + "|void|" + String.join("|", dataTypes) + ")(\\[\\]|<(" + String.join("|", dataTypes) + ")>)?\\s+";
 
         // Function name & variables Regex
         String function_variable_NameRegex = "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b";
 
         // Parameters Regex
-        String parameters = "\\s*\\(\\s*((" + String.join("|", varPrimitiveTypes) + "|" + String.join("|", collectionsNonprimitiveTypes)
-                + ")(\\[\\]|<" + String.join("|", nonPrimitiveTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*(,\\s*("
-                + String.join("|", varPrimitiveTypes) + "|" + String.join("|", collectionsNonprimitiveTypes)
-                + ")(\\[\\]|<" + String.join("|", nonPrimitiveTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*)*)?\\)\\s*$";
+        String parameters = "\\s*\\(\\s*((" + String.join("|", dataTypes) + "|" + String.join("|", dataTypes)
+                + ")(\\[\\]|<" + String.join("|", dataTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*(,\\s*("
+                + String.join("|", dataTypes) + "|" + String.join("|", dataTypes)
+                + ")(\\[\\]|<" + String.join("|", dataTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*)*)?\\)\\s*$";
 
         // Merged Regex
-        String fullMethodDeclarationRegex = modifiersRegex + returnTypeRegex + function_variable_NameRegex + parameters;
+        String regex = modifiersRegex + returnTypeRegex + function_variable_NameRegex + parameters;
 
-        // Check if the function header matches any of the patterns
-        if (header.matches(fullMethodDeclarationRegex)) {
-            System.out.println("Line no: " + lineNumber + " --> " + line.trim() +" --> is a valid function header");
+        if (line.matches(regex)) {
+            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " is a method declaration");
         } else {
-            System.out.println("Line no: " + lineNumber + " --> " + line.trim() +" --> is not a valid function header");
+            System.out.println(
+                    "Line no: " + lineNumber + " --> " + line.trim() + " is not a method declaration");
         }
-        
     }
 
 }
