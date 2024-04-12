@@ -7,3 +7,6 @@ public int[] getArray()
 public static void main(String[] args)
 public static void main(String[] args, String y)
 private void printMessage(int a, int b,)
+private void printMessage(int a, int b 
+private void printMessage int a, int b)
+private void printMessage (int a, int b)
