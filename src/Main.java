@@ -38,12 +38,11 @@ public class Main {
                 "interface", "long", "native", "new", "null", "package", "private", "protected", "public",
                 "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this",
                 "throw", "throws", "transient", "try", "void", "volatile", "while"));
-
-
+        // Ignoring the comments lines
         if (line.trim().startsWith("//") || line.trim().startsWith("/*") || line.trim().endsWith("*/")) {
             return;
         }
-        
+        // Flag: use it for the the no built message
         boolean foundIdentifier = false;
 
         for (String word : line.split(" ")) {
@@ -54,16 +53,10 @@ public class Main {
                     foundIdentifier = true;
                 }
             }
-            // else {
-            // System.out.println("Line no: " + lineNumber + " --> : no built-in language
-            // construct found");
-            // }
         }
-
         if (!foundIdentifier) {
             System.out.println("Line no: " + lineNumber + " --> : no built-in language construct found");
         }
-
     }
 
 
