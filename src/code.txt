@@ -14,3 +14,5 @@ while (i == 10)
 while (i >== 10)
 while (int i = 2 > 23)
 while (I == 3)
+
+ for (int i = 0; i < numbers.size(); i++)
