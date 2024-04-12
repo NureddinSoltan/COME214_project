@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main {
 
@@ -15,9 +17,10 @@ public class Main {
             "Byte", "Short", "Integer", "Long", "Float", "Double", "Boolean", "Character", "String"));
 
     public static void main(String[] args) {
-        String fileName = "src/code.txt";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        Path path = Paths.get("src", "file.txt");
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
             String line;
             int lineNumber = 1;
             while ((line = br.readLine()) != null) {
