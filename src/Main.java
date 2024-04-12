@@ -7,101 +7,54 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
     private static final Set<String> DATA_TYPES = new HashSet<>(Arrays.asList(
             "byte", "short", "int", "long", "float", "double", "boolean", "char",
             "Byte", "Short", "Integer", "Long", "Float", "Double", "Boolean", "Character", "String"));
-
     public static void main(String[] args) {
-        // String fileName = "src/code.txt"; // this won't detect the 'code.txt' from my
-        // end!
-        String fileName = "./code.txt";
+        Path path = Paths.get("src", "testComment.txt");
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        StringBuilder content = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
             String line;
-            int lineNumber = 1;
             while ((line = br.readLine()) != null) {
-
-                analyze_comment(line, lineNumber, br);
-                checkIdentifiers(line, lineNumber);
-                isFunctionHeader(line, lineNumber);
-                lineNumber++;
+                content.append(line).append("\n");  // Append each line with a newline
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        analyze_comments(content.toString());
     }
 
+    public static void analyze_comments(String content) {
+        // detect single line comments with regex
+        String singleLineComment = "//.*";
+        Pattern patternSingle = Pattern.compile(singleLineComment);
+        Matcher matcherSingle = patternSingle.matcher(content);
 
-    // This Function analyze a lines of input and checks if they are comments or not
-    // please leave (BufferedReader br & throws IOException):
-    // needed for line 16 (line, lineNumber, br) & 35 (br.readLine)
-    // removing'em won't make it work as expected, or won't work at all
-    public static void analyze_comment(String line, int line_num, BufferedReader br) throws IOException {
-        if (line.startsWith("//")) {
-            System.out.println("Line " + line_num + ": is a single-line comment");
-        } else if (line.startsWith("/*")) {
-            if (line.contains("*/")) {
-                System.out.println("Line " + line_num + ": is a single-line comment");
-            } else {
-                System.out.print("Line " + line_num + ": is a 'beginning' of a multi-line comment");
-                int end_line_num = line_num;
-                while ((line = br.readLine()) != null) {
-                    end_line_num++;
-                    if (line.trim().endsWith("*/")) {
-                        System.out.println(" which 'ended' at line " + end_line_num);
-                        break;
-                    }
-                }
-            }
-        } else {
-            System.out.println("Line " + line_num + ": is not a comment");
+        while (matcherSingle.find()) {
+            System.out.println("Single-line comment found: " + matcherSingle.group());
+        }
+
+        // detect multi-line comments with regex, using DOTALL flag
+        String multiLineComment = "/\\*.*?\\*/";
+        Pattern patternMulti = Pattern.compile(multiLineComment, Pattern.DOTALL);
+        Matcher matcherMulti = patternMulti.matcher(content);
+
+        while (matcherMulti.find()) {
+            System.out.println("Multi-line comment found: " + matcherMulti.group());
         }
     }
-}
 
-// if (line.startsWith("//") || line.startsWith("/*") && line.endsWith("*/")) {
-// if (line.startsWith("//")) {
-// System.out.println("Line --> " + line_num + ": is a single-line comment");
-// } else {
-// System.out.println("Line --> " + line_num + ": is a multi-line comment");
-// }
-// } else if ((line.startsWith("/*") && !(line.endsWith("*/")))
-// || (!line.startsWith("/*") && (line.endsWith("*/")))) {
-// System.out.println("Line --> " + line_num + ": is not a valid multi-line
-// comment");
-// } else if (line.startsWith("/")) {
-// System.out.println("Line --> " + line_num + ": is not a single-line
-// comment");
-// } else {
-// System.out.println("Line --> " + line_num + ": is not a comment");
-// }
 
-// else if (line.trim().startsWith("/*")) {
-// System.out.println("Line --> " + line_num + ": is a beginning of a multi-line
-// comment");
-// // ? check if the comment ends on the same line */
-// if (line.trim().endsWith("*/")) {
-// System.out.println(
-// "Line --> " + line_num + ": is the end of multi-line comment stared on the
-// same line :) ehh ");
-// } else {
-// // ? keep it rooling till it hits the end of the multi-line comment
-// int end_line_num = line_num;
-// while ((line = br.readLine()) != null) {
-// end_line_num++;
-// if (line.trim().endsWith("*/")) {
-// System.out.println(
-// "Line --> " + end_line_num + ": is the end of multi-line comment stared on
-// line "
-// + line_num);
-// break;
-// }
-// }
-// }
-// }
     public static void checkIdentifiers(String line, int lineNumber) {
         List<String> identifiers = new ArrayList<>(Arrays.asList(
                 "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
@@ -126,16 +79,10 @@ public class Main {
                     foundIdentifier = true;
                 }
             }
-            // else {
-            // System.out.println("Line no: " + lineNumber + " --> : no built-in language
-            // construct found");
-            // }
         }
-
         if (!foundIdentifier) {
             System.out.println("Line no: " + lineNumber + " --> : no built-in language construct found");
         }
-
     }
 
 

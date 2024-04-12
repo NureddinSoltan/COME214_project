@@ -1,14 +1,14 @@
-// Ibrahim
-/ Ibrahim
-/* Ibrahim */
-/* Ibrahim
-Ibrahim */
+// single line comment
+/ not single line comment
+/* multi line comment */
+/* this is a multi line 
+comment */
 /*
-* Ibrahim
-* Ibrahim
-* Ibrahim
+* multi line comment
+* multi line comment
+* multi line comment
 */
-Ibrahim
+not single line comment
 
 int inrajim
 intt

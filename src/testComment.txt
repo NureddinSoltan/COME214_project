@@ -1,0 +1,12 @@
+// single line comment
+/ not single line comment
+/* multi line comment */
+/* 
+this is a multi line 
+comment 
+*/
+/*
+* multi line comment
+* multi line comment
+* multi line comment
+*/
