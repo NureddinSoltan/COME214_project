@@ -16,7 +16,7 @@ public class Main {
             String line;
             int lineNumber = 1;
             while ((line = br.readLine()) != null) {
-                // checkIdentifiers(line, lineNumber);
+                checkIdentifiers(line, lineNumber);
                 isFunctionHeader(line, lineNumber);
                 lineNumber++;
             }
