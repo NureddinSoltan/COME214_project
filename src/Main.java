@@ -22,35 +22,39 @@ public class Main {
     }
 
     public static void checkIdentifiers(String line, int lineNumber) {
-        List<String> identifiers = new ArrayList<> (Arrays.asList(
-            "if", "for", "while", "switch", "case", "break", "continue",
-                "return", "try", "catch", "finally", "throw", "throws",
-                "class", "interface", "enum", "public", "private",
-                "protected", "static", "final", "void", "int", "long",
-                "float", "double", "boolean", "char", "String"
-        ));
+        List<String> identifiers = new ArrayList<>(Arrays.asList(
+                "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
+                "const", "continue", "default", "do", "double", "else", "enum", "extends", "final",
+                "finally", "float", "for", "goto", "if", "implements", "import", "instanceof", "int",
+                "interface", "long", "native", "new", "null", "package", "private", "protected", "public",
+                "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this",
+                "throw", "throws", "transient", "try", "void", "volatile", "while"));
 
+
+        if (line.trim().startsWith("//") || line.trim().startsWith("/*") || line.trim().endsWith("*/")) {
+            return;
+        }
+        
         boolean foundIdentifier = false;
 
         for (String word : line.split(" ")) {
-            if (identifiers.contains(word)){
+            if (identifiers.contains(word)) {
                 if (line.matches(".*\\b" + word + "\\b.*")) {
-                    System.out.println("Line no: " + lineNumber + " --> " + word + ": is a built-in language construct");
+                    System.out
+                            .println("Line no: " + lineNumber + " --> " + word + ": is a built-in language construct");
                     foundIdentifier = true;
-                } 
+                }
             }
             // else {
-            //     System.out.println("Line no: " + lineNumber + " --> : no built-in language construct found");
-            // } 
+            // System.out.println("Line no: " + lineNumber + " --> : no built-in language
+            // construct found");
+            // }
         }
-        
+
         if (!foundIdentifier) {
             System.out.println("Line no: " + lineNumber + " --> : no built-in language construct found");
         }
 
-        if (line.trim().startsWith("//") || line.trim().startsWith("/*") || line.trim().endsWith("*/")) {
-            return;
-        }  
     }
 
 }
