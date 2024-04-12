@@ -1,0 +1,16 @@
+while (i< 10)
+while (i < 10
+while i < 10)
+while i < 10
+while (i 10)
+while (i < stre)
+whil (i < 10)
+while (i <== 10)
+while (sda > aopds)
+while ( i === 10) Error
+while (i != 10) { }
+while (i !== 10) Error
+while (i == 10)
+while (i >== 10)
+while (int i = 2 > 23)
+while (I == 3)
