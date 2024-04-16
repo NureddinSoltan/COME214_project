@@ -109,7 +109,6 @@ public static void analyze_comments(String line, int line_num) {
             }
 
         }
-
         else {
             System.out.println("Line --> " + line_num + ": is a multi-line comment");
         }
@@ -121,27 +120,6 @@ public static void analyze_comments(String line, int line_num) {
         System.out.println("Line --> " + line_num + ": is not a comment");
     }
 }
-    public static void analyze_comments(String content) {
-        // detect single line comments with regex
-        String singleLineComment = "//.*";
-        Pattern patternSingle = Pattern.compile(singleLineComment);
-        Matcher matcherSingle = patternSingle.matcher(content);
-
-        while (matcherSingle.find()) {
-            System.out.println("Single-line comment found: " + matcherSingle.group());
-        }
-
-        // detect multi-line comments with regex, using DOTALL flag
-        String multiLineComment = "/\\*.*?\\*/";
-        Pattern patternMulti = Pattern.compile(multiLineComment, Pattern.DOTALL);
-        Matcher matcherMulti = patternMulti.matcher(content);
-
-        while (matcherMulti.find()) {
-            System.out.println("Multi-line comment found: " + matcherMulti.group());
-        }
-    }
-
-
 
     public static void forLoopType(String line, int lineNumber) {
         // Modified forLoopPattern to use backreferences to ensure the same variable name is used
