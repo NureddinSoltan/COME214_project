@@ -1,6 +1,15 @@
 // single line comment
 // single line
 / not single line comment
+/* beginning of multi line
+ending of multi line */
+/* multi line comment */
+/**/
+/* */
+
+// single line comment
+// single line
+/ not single line comment
 /* multi line comment */
 /* 
 this is a multi line 

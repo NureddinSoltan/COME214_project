@@ -19,22 +19,37 @@ public class Main {
     final static String variable_NameRegex = "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b";
 
     public static void main(String[] args) {
+//        System.out.println("=====================================Testing comments=====================================");
+//        Path path = Paths.get("src", "commentTest.txt");
+//
+//        StringBuilder content = new StringBuilder();
+//
+//        try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                content.append(line).append("\n");  // Append each line with a newline
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        analyze_comments(content.toString());
+
         System.out.println("=====================================Testing comments=====================================");
+        // test function headers with the file functionTest.txt
         Path path = Paths.get("src", "commentTest.txt");
 
-        StringBuilder content = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))){
 
-        try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
             String line;
+            int lineNumber = 1;
             while ((line = br.readLine()) != null) {
-                content.append(line).append("\n");  // Append each line with a newline
+                analyze_comments(line, lineNumber);
+                lineNumber++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        analyze_comments(content.toString());
-
 
         System.out.println("=====================================Testing function headers=====================================");
         // test function headers with the file functionTest.txt
@@ -96,6 +111,50 @@ public class Main {
         }
     }
 
+//    public static void analyze_comments(String content) {
+//        // detect single line comments with regex
+//        String singleLineComment = "//.*";
+//        Pattern patternSingle = Pattern.compile(singleLineComment);
+//        Matcher matcherSingle = patternSingle.matcher(content);
+//
+//        while (matcherSingle.find()) {
+//            System.out.println("Single-line comment found: " + matcherSingle.group());
+//        }
+//
+//        // detect multi-line comments with regex, using DOTALL flag
+//        String multiLineComment = "/\\*.*?\\*/";
+//        Pattern patternMulti = Pattern.compile(multiLineComment, Pattern.DOTALL);
+//        Matcher matcherMulti = patternMulti.matcher(content);
+//
+//        while (matcherMulti.find()) {
+//            System.out.println("Multi-line comment found: " + matcherMulti.group());
+//        }
+//    }
+public static void analyze_comments(String line, int line_num) {
+    if (line.startsWith("//") || line.startsWith("/*")) {
+        if (line.startsWith("//")) {
+            System.out.println("Line --> " + line_num + ": is a single-line comment");
+        } else if (line.trim().startsWith("/*")) {
+            // ? check if the comment ends on the same line */
+            if (line.trim().endsWith("*/")) {
+                System.out.println("Line --> " + line_num + ": is a multi-line comment in one line");
+            } else if ((line.startsWith("/") && !(line.endsWith("/")))) {
+                System.out.println("Line --> " + line_num + ": is not a valid multi-line comment");
+            }
+
+        }
+
+        else {
+            System.out.println("Line --> " + line_num + ": is a multi-line comment");
+        }
+    } else if (line.startsWith("/")) {
+        System.out.println("Line --> " + line_num + ": is not a single-line comment");
+    } else if ((!line.startsWith("/") && (line.endsWith("/")))) {
+        System.out.println("Line --> " + line_num + ": is not a valid multi-line comment");
+    } else {
+        System.out.println("Line --> " + line_num + ": is not a comment");
+    }
+}
     public static void analyze_comments(String content) {
         // detect single line comments with regex
         String singleLineComment = "//.*";
@@ -115,6 +174,7 @@ public class Main {
             System.out.println("Multi-line comment found: " + matcherMulti.group());
         }
     }
+
 
 
     public static void forLoopType(String line, int lineNumber) {
