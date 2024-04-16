@@ -1,9 +1,9 @@
 public public static int sum (int a, int b, int c, int d)
-public static int sum (int a, int b, int c, int d)
+public static int sum (int a, int b, int c, int d) { }
 public static void ibrahim(int a, String b, double c, int k, float x, float y, String[] args)
 private void printMessage
 void calculate(float x, float y, z)
-float calculate(float x, int y)
+float calculate(float x, int y) {
 static String getName()
 public int[] getArray()
 public static void main(String[] args)

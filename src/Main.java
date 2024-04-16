@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class Main {
     final static String[] varPrimitiveTypes = { "String", "int", "double", "boolean", "char", "long", "float", "byte", "short" };
-    final static   String[] comparisonOperators = { "==", "!=", ">", ">=", "<", "<=" };
+    final static String[] comparisonOperators = { "==", "!=", ">", ">=", "<", "<=" };
     
     // Join the comparison operators into a regex group
     final static String comparisonOperatorsRegex = "(" + String.join("|", comparisonOperators) + ")";
@@ -74,7 +74,7 @@ public class Main {
             String line;
             int lineNumber = 1;
             while ((line = br.readLine()) != null) {
-                foorLoopType(line, lineNumber);
+                forLoopType(line, lineNumber);
                 lineNumber++;
             }
         } catch (IOException e) {
@@ -117,27 +117,27 @@ public class Main {
     }
 
 
-
-    public static void foorLoopType(String line, int lineNumber) {
+    public static void forLoopType(String line, int lineNumber) {
         // Modified forLoopPattern to use backreferences to ensure the same variable name is used
-        String forLoopPattern = "^\\s*for\\s*\\(\\s*" + primitiveTypes + "\\s+(" + variable_NameRegex + ")\\s*=\\s*\\d+\\s*;\\s*\\2\\s*" + comparisonOperatorsRegex + "\\s*\\d+\\s*;\\s*(\\2\\s*(\\+\\+|--)|\\s*(\\+\\+|--)\\s*\\2|\\2\\s*[\\+\\-\\*\\/]=\\s*\\d+|\\2\\s*=\\s*\\2\\s*[\\+\\-\\*\\/]\\s*\\d+)\\)\\s*.*";
+        String forLoopPattern = "^\\s*for\\s*\\(\\s*" + primitiveTypes + "\\s+(" + variable_NameRegex + ")\\s*=\\s*\\d+\\s*;\\s*\\2\\s*" +
+                comparisonOperatorsRegex+"\\s*\\d+\\s*;\\s*(\\2\\s*(\\+\\+|--)|\\s*(\\+\\+|--)\\s*\\2|\\2\\s*[\\+\\-\\*\\/]=\\s*\\d+|\\2\\s*=\\s*\\2\\s*[\\+\\-\\*\\/]\\s*\\d+)\\)\\s*"; //at the end it was .*
 
         // Check if the line matches the for loop pattern
         if (line.matches(forLoopPattern)) {
-            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " --> is a valid for loop");
+            System.out.println("Line no: " + lineNumber + " --> " + line + " --> is a valid for loop");
         } else {
-            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " --> is not a valid for loop");
+            System.out.println("Line no: " + lineNumber + " --> " + line + " --> is not a valid for loop");
         }
     }
     public static void whileLoopType(String line, int lineNumber) {
         // Modified forLoopPattern to use backreferences to ensure the same variable name is used
-        String whileLoopPattern = "^\\s*while\\s*\\(\\s*+(" + variable_NameRegex + ")\\s*" + comparisonOperatorsRegex + "\\s*(\\d|\\w)+\\s*\\)\\s*.*";
-        
+        String whileLoopPattern = "^\\s*while\\s*\\(\\s*+(" + variable_NameRegex + ")\\s*" + comparisonOperatorsRegex + "\\s*(\\d|\\w)+\\s*\\)\\s*"; //at the end it was .*
+
         // Check if the line matches the for loop pattern
         if (line.matches(whileLoopPattern)) {
-            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " --> is a valid for loop");
+            System.out.println("Line no: " + lineNumber + " --> " + line + " --> is a valid while loop");
         } else {
-            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " --> is not a valid for loop");
+            System.out.println("Line no: " + lineNumber + " --> " + line + " --> is not a valid while loop");
         }
     }
 
@@ -153,14 +153,13 @@ public class Main {
         if (line.trim().startsWith("//") || line.trim().startsWith("/*") || line.trim().endsWith("*/")) {
             return;
         }
-        // Flag: use it for the the no built message
+        // Flag: use it for the no built message
         boolean foundIdentifier = false;
 
         for (String word : line.split(" ")) {
             if (identifiers.contains(word)) {
                 if (line.matches(".*\\b" + word + "\\b.*")) {
-                    System.out
-                            .println("Line no: " + lineNumber + " --> " + word + ": is a built-in language construct");
+                    System.out.println("Line no: " + lineNumber + " --> " + word + ": is a built-in language construct");
                     foundIdentifier = true;
                 }
             }
@@ -176,19 +175,28 @@ public class Main {
         "char", "long", "float", "byte", "short"};
 
         // Modifiers Regex
-        String modifiersRegex = "^((public|private|protected|\\s)*\\s*)(static\\s+)?";
+        String modifiersRegex = "^((public|private|protected|\\s)?\\s*)(static\\s+)?"; //first ? instead of *
 
         // ReturnT types Regex
-        String returnTypeRegex = "(" + String.join("|", dataTypes) + "|void|" + String.join("|", dataTypes) + ")(\\[\\]|<(" + String.join("|", dataTypes) + ")>)?\\s+";
+//        String returnTypeRegex = "(" + String.join("|", dataTypes) + "|void|" + String.join("|", dataTypes) +
+//                ")(\\[\\]|<(" + String.join("|", dataTypes) + ")>)?\\s+";
+//        String returnTypeRegex = "(" + data_types_regex + "|void|" + data_types_regex + ")(\\[\\]|<(" + data_types_regex + ")>)?\\s+";
+
+        String data_types_regex = String.join("|", dataTypes);
+        String returnTypeRegex = "(" + "void|(" + data_types_regex + ")(\\[\\]|<(" + data_types_regex + ")>)?)\\s+";
 
         // Function name & variables Regex
         String function_variable_NameRegex = "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b";
-
+//        // Parameters Regex
+//        String parameters = "\\s*\\(\\s*((" + String.join("|", dataTypes) + "|" + String.join("|", dataTypes)
+//                + ")(\\[\\]|<" + String.join("|", dataTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*(,\\s*("
+//                + String.join("|", dataTypes) + "|" + String.join("|", dataTypes)
+//                + ")(\\[\\]|<" + String.join("|", dataTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*)*)?\\)\\s*$";
         // Parameters Regex
-        String parameters = "\\s*\\(\\s*((" + String.join("|", dataTypes) + "|" + String.join("|", dataTypes)
-                + ")(\\[\\]|<" + String.join("|", dataTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*(,\\s*("
-                + String.join("|", dataTypes) + "|" + String.join("|", dataTypes)
-                + ")(\\[\\]|<" + String.join("|", dataTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*)*)?\\)\\s*$";
+        String parameters = "\\s*\\(\\s*((" + data_types_regex + "|" + data_types_regex
+                + ")(\\[\\]|<" + data_types_regex + ">)?+\\s" + function_variable_NameRegex + "\\s*(,\\s*("
+                + data_types_regex + "|" + data_types_regex + ")(\\[\\]|<" + data_types_regex + ">)?+\\s"
+                + function_variable_NameRegex + "\\s*)*)?\\)\\s*$";
 
         // Merged Regex
         String regex = modifiersRegex + returnTypeRegex + function_variable_NameRegex + parameters;
@@ -196,8 +204,7 @@ public class Main {
         if (line.matches(regex)) {
             System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " is a method declaration");
         } else {
-            System.out.println(
-                    "Line no: " + lineNumber + " --> " + line.trim() + " is not a method declaration");
+            System.out.println("Line no: " + lineNumber + " --> " + line.trim() + " is not a method declaration");
         }
     }
 
