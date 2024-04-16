@@ -19,21 +19,6 @@ public class Main {
     final static String variable_NameRegex = "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b";
 
     public static void main(String[] args) {
-//        System.out.println("=====================================Testing comments=====================================");
-//        Path path = Paths.get("src", "commentTest.txt");
-//
-//        StringBuilder content = new StringBuilder();
-//
-//        try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                content.append(line).append("\n");  // Append each line with a newline
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        analyze_comments(content.toString());
 
         System.out.println("=====================================Testing comments=====================================");
         // test function headers with the file functionTest.txt
@@ -111,25 +96,6 @@ public class Main {
         }
     }
 
-//    public static void analyze_comments(String content) {
-//        // detect single line comments with regex
-//        String singleLineComment = "//.*";
-//        Pattern patternSingle = Pattern.compile(singleLineComment);
-//        Matcher matcherSingle = patternSingle.matcher(content);
-//
-//        while (matcherSingle.find()) {
-//            System.out.println("Single-line comment found: " + matcherSingle.group());
-//        }
-//
-//        // detect multi-line comments with regex, using DOTALL flag
-//        String multiLineComment = "/\\*.*?\\*/";
-//        Pattern patternMulti = Pattern.compile(multiLineComment, Pattern.DOTALL);
-//        Matcher matcherMulti = patternMulti.matcher(content);
-//
-//        while (matcherMulti.find()) {
-//            System.out.println("Multi-line comment found: " + matcherMulti.group());
-//        }
-//    }
 public static void analyze_comments(String line, int line_num) {
     if (line.startsWith("//") || line.startsWith("/*")) {
         if (line.startsWith("//")) {
