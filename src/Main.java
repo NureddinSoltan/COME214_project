@@ -97,27 +97,12 @@ public class Main {
     }
 
 public static void analyze_comments(String line, int line_num) {
-    if (line.startsWith("//") || line.startsWith("/*")) {
-        if (line.startsWith("//")) {
-            System.out.println("Line --> " + line_num + ": is a single-line comment");
-        } else if (line.trim().startsWith("/*")) {
-            // ? check if the comment ends on the same line */
-            if (line.trim().endsWith("*/")) {
-                System.out.println("Line --> " + line_num + ": is a multi-line comment in one line");
-            } else if ((line.startsWith("/") && !(line.endsWith("/")))) {
-                System.out.println("Line --> " + line_num + ": is not a valid multi-line comment");
-            }
-
-        }
-        else {
-            System.out.println("Line --> " + line_num + ": is a multi-line comment");
-        }
-    } else if (line.startsWith("/")) {
-        System.out.println("Line --> " + line_num + ": is not a single-line comment");
-    } else if ((!line.startsWith("/") && (line.endsWith("/")))) {
-        System.out.println("Line --> " + line_num + ": is not a valid multi-line comment");
-    } else {
-        System.out.println("Line --> " + line_num + ": is not a comment");
+    if (line.startsWith("//")){
+        System.out.println("Line --> " + line_num + ": is a single-line comment");
+    } else if(line.startsWith("/*") && line.endsWith("*/")){
+        System.out.println("Line --> " + line_num + ": is a multi-line comment in one line");
+    } else{
+        System.out.println("Line --> " + line_num + ": Is not a valid comment");
     }
 }
 
@@ -172,6 +157,8 @@ public static void analyze_comments(String line, int line_num) {
             System.out.println("Line no: " + lineNumber + " --> : no built-in language construct found");
         }
     }
+
+
     public static void isFunctionHeader(String line, int lineNumber) {
         // Define 3 arrays of all types
         String[] dataTypes = {"Byte", "Short", "Integer", "Long", "Float", "Double", "Boolean", "Character", "String",
