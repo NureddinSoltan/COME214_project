@@ -177,21 +177,13 @@ public class Main {
         // Modifiers Regex
         String modifiersRegex = "^((public|private|protected|\\s)?\\s*)(static\\s+)?"; //first ? instead of *
 
-        // ReturnT types Regex
-//        String returnTypeRegex = "(" + String.join("|", dataTypes) + "|void|" + String.join("|", dataTypes) +
-//                ")(\\[\\]|<(" + String.join("|", dataTypes) + ")>)?\\s+";
-//        String returnTypeRegex = "(" + data_types_regex + "|void|" + data_types_regex + ")(\\[\\]|<(" + data_types_regex + ")>)?\\s+";
-
         String data_types_regex = String.join("|", dataTypes);
+        // ReturnT types Regex
         String returnTypeRegex = "(" + "void|(" + data_types_regex + ")(\\[\\]|<(" + data_types_regex + ")>)?)\\s+";
 
         // Function name & variables Regex
         String function_variable_NameRegex = "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b";
-//        // Parameters Regex
-//        String parameters = "\\s*\\(\\s*((" + String.join("|", dataTypes) + "|" + String.join("|", dataTypes)
-//                + ")(\\[\\]|<" + String.join("|", dataTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*(,\\s*("
-//                + String.join("|", dataTypes) + "|" + String.join("|", dataTypes)
-//                + ")(\\[\\]|<" + String.join("|", dataTypes) + ">)?+\\s" + function_variable_NameRegex + "\\s*)*)?\\)\\s*$";
+
         // Parameters Regex
         String parameters = "\\s*\\(\\s*((" + data_types_regex + "|" + data_types_regex
                 + ")(\\[\\]|<" + data_types_regex + ">)?+\\s" + function_variable_NameRegex + "\\s*(,\\s*("
